@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+  <form action="http://130.216.208.77/cardiofitter/default/fitting" 
+        method="post" id="fitter">
+
+  <label for="mesh.name">Mesh Name (or identifier)</label> 
+  <input name="mesh.name" /> 
+ 
+  <p>Enter the URI to the following meshes:</p> 
+  <fieldset> 
+    <legend>Epicardial</legend> 
+    <label for="epi.ds">DS</label> 
+    <input name="epi.ds" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph11_epi_DS.vtp"/> <br />
+ 
+    <label for="epi.es">ES</label> 
+    <input name="epi.es" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph07_epi_ES.vtp" /> <br />
+ 
+    <label for="epi.ed">ED</label> 
+    <input name="epi.ed" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph19_epi_ED.vtp" /> <br />
+  </fieldset> 
+ 
+  <fieldset> 
+    <legend>Endocardial</legend> 
+    <label for="endo.ds">DS</label> 
+    <input name="endo.ds" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph11_endo_DS.vtp" /> <br />
+ 
+    <label for="endo.es">ES</label> 
+    <input name="endo.es" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph07_endo_ES.vtp" /> <br />
+ 
+    <label for="endo.ed">ED</label> 
+    <input name="endo.ed" value="http://130.216.208.77:8380/pmr/w/tommy/sc-n-02/rawfile/2ca1558b76ec38e56cdd6a1d661447e0590f5e06/ph19_endo_ED.vtp" /> <br />
+  </fieldset> 
+
+   <input type="submit" value="Fit" />
+  </form>
+
+<script>
+  /* attach a submit handler to the form */
+  $("#fitter").submit(function(event) {
+
+    /* stop form from submitting normally */
+    event.preventDefault(); 
+        
+    /* get some values from elements on the page: */
+    var $form = $( this ),
+        p = { 
+          'mesh.name': $form.find('input[name="mesh.name"]').val(),
+          'epi.ds': $form.find('input[name="epi.ds"]').val(),
+          'epi.ed': $form.find('input[name="epi.es"]').val(),
+          'epi.es': $form.find('input[name="epi.ed"]').val(),
+          'endo.ds': $form.find('input[name="endo.ds"]').val(),
+          'endo.ed': $form.find('input[name="endo.es"]').val(),
+          'endo.es': $form.find('input[name="endo.ed"]').val(),
+        },
+        url = $form.attr('action');
+
+    /* Send the data using post and log the result into the console */
+    $.post( url, p,
+      function( data ) {
+          console.log(data);
+      },
+      'json'
+    );
+  });
+</script>
+
+</body>
+</html>
