@@ -1,0 +1,37 @@
+{{extend 'service_layout.html'}}
+
+<h2>Epicardial/Endocardial Mesh Fitter</h2>
+<form enctype="multipart/form-data" action="fitting" method="post">
+
+  <label for="mesh.name">Mesh Name (or identifier)</label>
+  <input name="mesh.name" />
+
+  <p>Enter the URI to the following meshes:</p>
+  <fieldset>
+    <legend>Epicardial</legend>
+    <label for="epi.ds">DS</label>
+    <input name="epi.ds" />
+
+    <label for="epi.es">ES</label>
+    <input name="epi.es" />
+
+    <label for="epi.ed">ED</label>
+    <input name="epi.ed" />
+  </fieldset>
+
+  <fieldset>
+    <legend>Endocardial</legend>
+    <label for="endo.ds">DS</label>
+    <input name="endo.ds" />
+
+    <label for="endo.es">ES</label>
+    <input name="endo.es" />
+
+    <label for="endo.ed">ED</label>
+    <input name="endo.ed" />
+  </fieldset>
+
+  <input type="submit" />
+</form>
+
+<!--{{#=form}}-->
